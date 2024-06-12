@@ -7,9 +7,8 @@ const Root = () => {
     return (
         <div className="container mx-auto">
             <Navbar></Navbar>
-            <App></App>
             <Outlet></Outlet>
-           
+
         </div>
     );
 };

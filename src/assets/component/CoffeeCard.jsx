@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 
 const CoffeeCard = ({ coffee }) => {
-    const { _id, name, quantity, Suplier, Taste, Category, Details, Photo } = coffee
+
     const handledelete = _id => {
         console.log(_id)
         Swal.fire({
@@ -17,7 +17,7 @@ const CoffeeCard = ({ coffee }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:3000/coffee/${_id}`, {
+                fetch(`http://localhost:5001/coffee/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -41,23 +41,21 @@ const CoffeeCard = ({ coffee }) => {
     return (
 
         <div className="card  card-side   bg-base-100 shadow-xl rounded-3xl">
-            <figure className="rounded-3xl"><img className="w-80 h-48 rounded-3xl" src={Photo} alt="Shoes" /></figure>
+            <figure className="rounded-3xl"><img className="w-80 h-48 rounded-3xl" src='' alt="Shoes" /></figure>
             <div className=" flex justify-between w-full p-10 pr-5">
                 <div className="space-y-3">
-                    <h2 className="card-title">{name}</h2>
-                    <p>{Category}</p>
-                    <p>{Category}</p>
-                    <p>{Category}</p>
+                    <h2 className="card-title"></h2>
+
                 </div>
 
                 <div className="card-actions justify-end gap-4 space-y-5">
                     <div className="join join-vertical">
                         <button className="btn join-item">view</button>
 
-                        <Link to={`updatecoffee/${_id}`}>
+                        <Link to=''>
                             <button className="btn join-item">Edite</button>
                         </Link>
-                        <button onClick={() => handledelete(_id)} className="btn join-item bg-orange-500">X</button>
+                        <button onClick={() => handledelete()} className="btn join-item bg-orange-500">X</button>
                     </div>
                 </div>
             </div>

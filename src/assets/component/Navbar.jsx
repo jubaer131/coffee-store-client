@@ -1,12 +1,34 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../Hooks/UseAuth";
+import { getAuth, signOut } from "firebase/auth";
+import UseAdmin from "../Hooks/UseAdmin";
 
 
 const Navbar = () => {
 
+    const { user } = UseAuth()
+    const [isAdmin] = UseAdmin()
+    console.log(isAdmin)
+
+    const handlelogout = () => {
+
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            console.log('logout successful')
+        }).catch((error) => {
+            console.log(error.message)
+        });
+
+    }
+
     const links = <>
-        <Link className="mr-5 text-xl text-green-500" to="/addcoffee"><button>add coffee</button></Link>
-        <Link className="mr-5 text-xl text-green-500" to="/updatecoffee/:id"><button>updateCoffee</button></Link>
+        <Link className="mr-5 text-xl text-green-500" to="/calender"><button>Calender</button></Link>
+        <Link className="mr-5 text-xl text-green-500" to="/app"><button>App </button></Link>
         <Link className="mr-5 text-xl text-green-500" to="/"><button>Home</button></Link>
+        <Link className="mr-5 text-xl text-green-500" to="/dashboard"><button>Dashboard</button></Link>
+        <Link className="mr-5 text-xl text-green-500" to="/sort"><button>Sort</button></Link>
+
 
     </>
 
@@ -30,7 +52,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {
+                    user ? <button onClick={handlelogout} className="btn text-green-600">Logout</button> : <> <Link className="mr-5 text-xl text-green-500" to="/login"><button>Login</button></Link></>
+                }
             </div>
         </div>
     );
